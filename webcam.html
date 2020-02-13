@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>Self Camera</title>
+        <!-- bulma -->
+        <link rel="stylesheet" href="./bulma/bulma.css">
+        <script defer src="./bulma/all.js"></script>
+        <!-- jquery 
+        <script src="./jquery/jquery-3.3.1.js"></script> -->
+        <!-- jquery -->
+        <script src="./jsQR/jsQR.js"></script>
+        </head>
+<body>
+    <button id='BtnStart' class='button' >撮影開始</button>
+    <button id='BtnReadCode' class='button'>認識開始</button>
+    <input class="input" id="ReadResult" type="text" placeholder="読取結果">
+    <video id="myVideo" width="400" height="300" autoplay="1"></video>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <script type="text/javascript">
+    var instance =  document.querySelector("video");
+    document.addEventListener('DOMContentLoaded',function(){
+        document.querySelector('#BtnStart').addEventListener('click', function() {
+            let p = navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+            p.then(function (mediaStream) {
+                instance.srcObject = mediaStream;
+            })
+        })
+        document.querySelector('#BtnReadCode').addEventListener('click', function() {
+            //let canv = document.createElement("canvas");
+            //canv.height = this.height;
+            //canv.width = this.width;
+            let canv = document.querySelector("canvas");
+            const context = canv.getContext("2d");
+            context.drawImage(instance, 0, 0, instance.width, instance.height);
+            const imageData = context.getImageData(0, 0, instance.width, instance.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+            if (code) {
+                document.querySelector("#ReadResult").value = "Found QR code" + " " + code + " " + code.data
+            }
+            else {
+                document.querySelector("#ReadResult").value = "not found";
+            }
+        })
+    });
+    </script>
+</body>
+
+</html>
