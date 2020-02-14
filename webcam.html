@@ -20,7 +20,7 @@
     var instance =  document.querySelector("video");
     document.addEventListener('DOMContentLoaded',function(){
         document.querySelector('#BtnStart').addEventListener('click', function() {
-            let p = navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+            let p = navigator.mediaDevices.getUserMedia({ audio: false, video: {facingMode: 'environment'}});
             p.then(function (mediaStream) {
                 instance.srcObject = mediaStream;
             })
