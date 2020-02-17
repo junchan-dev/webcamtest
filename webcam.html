@@ -11,7 +11,7 @@
         <h3 class="title">QRコードのテスト実施</h3>
         <div class="container">
             <div class="box">
-                    <div class="columns">
+                    <div class="columns is-mobile">
                         <div class="column">
                             <button id='BtnStart' class='button is-rounded is-large is-fullwidth'>撮影開始</button>
                         </div>
@@ -62,11 +62,10 @@
                 area.appendChild(p);
             }
             else {
-                alert('QRではない');
                 var area = document.querySelector("#ReadResult");
                 var p = document.createElement('p');
-                p.innerText = "not found";
-                p.className = 'notification is-info is-light';
+                p.innerText = "QR code not found";
+                p.className = 'notification is-danger is-light';
                 area.appendChild(p);
             }
         })
