@@ -1,13 +1,9 @@
 <!doctype html>
 <html>
 <head>
-    <title>Self Camera</title>
-        <!-- bulma -->
+    <title>QRテスト</title>
         <link rel="stylesheet" href="./bulma/bulma.css">
         <script defer src="./bulma/all.js"></script>
-        <!-- jquery 
-        <script src="./jquery/jquery-3.3.1.js"></script> -->
-        <!-- jquery -->
         <script src="./jsQR/jsQR.js"></script>
         </head>
 <body>
@@ -17,10 +13,10 @@
             <div class="box">
                     <div class="columns">
                         <div class="column">
-                            <button id='BtnStart' class='button is-rounded'>撮影開始</button>
+                            <button id='BtnStart' class='button is-rounded is-large is-fullwidth'>撮影開始</button>
                         </div>
                         <div class="column">
-                            <button id='BtnReadCode' class='button is-rounded'>認識開始</button>
+                            <button id='BtnReadCode' class='button is-rounded is-large is-fullwidth'>認識開始</button>
                         </div>
                     </div>
             </div>
@@ -35,8 +31,10 @@
                 </div>
             </div>
             <div class="box">
-                
-                <input class="input" id="ReadResult" type="text" placeholder="読取結果">
+                <!-- <input class="input" id="ReadResult" type="text" placeholder="読取結果"> -->
+                <div id="ReadResult">
+
+                </div>
             </div>
     </section>
 
@@ -50,19 +48,24 @@
             })
         })
         document.querySelector('#BtnReadCode').addEventListener('click', function() {
-            //let canv = document.createElement("canvas");
-            //canv.height = this.height;
-            //canv.width = this.width;
             let canv = document.querySelector("canvas");
             const context = canv.getContext("2d");
             context.drawImage(instance, 0, 0, instance.width, instance.height);
             const imageData = context.getImageData(0, 0, instance.width, instance.height);
             const code = jsQR(imageData.data, imageData.width, imageData.height);
             if (code) {
-                document.querySelector("#ReadResult").value = "Found QR code" + " " + code + " " + code.data
+                //document.querySelector("#ReadResult").value = "Found QR code" + " " + code + " " + code.data
+                var area = document.querySelector("#ReadResult");
+                var p = document.createElement('p');
+                p.value = code.data;
+                area.appendChild(p);
             }
             else {
-                document.querySelector("#ReadResult").value = "not found";
+                alert('QRではない');
+                var area = document.querySelector("#ReadResult");
+                var p = document.createElement('p');
+                p.value = "not found";
+                area.appendChild(p);
             }
         })
     });
