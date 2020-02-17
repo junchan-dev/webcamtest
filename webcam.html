@@ -57,14 +57,16 @@
                 //document.querySelector("#ReadResult").value = "Found QR code" + " " + code + " " + code.data
                 var area = document.querySelector("#ReadResult");
                 var p = document.createElement('p');
-                p.value = code.data;
+                p.innerText = code.data;
+                p.className = 'notification is-info is-light';
                 area.appendChild(p);
             }
             else {
                 alert('QRではない');
                 var area = document.querySelector("#ReadResult");
                 var p = document.createElement('p');
-                p.value = "not found";
+                p.innerText = "not found";
+                p.className = 'notification is-info is-light';
                 area.appendChild(p);
             }
         })
