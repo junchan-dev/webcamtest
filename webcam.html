@@ -11,11 +11,35 @@
         <script src="./jsQR/jsQR.js"></script>
         </head>
 <body>
-    <button id='BtnStart' class='button' >撮影開始</button>
-    <button id='BtnReadCode' class='button'>認識開始</button>
-    <input class="input" id="ReadResult" type="text" placeholder="読取結果">
-    <video id="myVideo" width="400" height="300" autoplay="1"></video>
-    <canvas id="canvas" width="400" height="300"></canvas>
+    <section class="section has-background-primary">
+        <h3 class="title">QRコードのテスト実施</h3>
+        <div class="container">
+            <div class="box">
+                    <div class="columns">
+                        <div class="column">
+                            <button id='BtnStart' class='button is-rounded'>撮影開始</button>
+                        </div>
+                        <div class="column">
+                            <button id='BtnReadCode' class='button is-rounded'>認識開始</button>
+                        </div>
+                    </div>
+            </div>
+            <div class="box">
+                <div class="columns">
+                    <div class="column">
+                        <video id="myVideo" width="400" height="300" autoplay="1"></video>
+                    </div>
+                    <div class="column">
+                        <canvas id="canvas" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                
+                <input class="input" id="ReadResult" type="text" placeholder="読取結果">
+            </div>
+    </section>
+
     <script type="text/javascript">
     var instance =  document.querySelector("video");
     document.addEventListener('DOMContentLoaded',function(){
